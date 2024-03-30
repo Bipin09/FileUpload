@@ -1,0 +1,29 @@
+﻿@page "/fileupload"
+
+
+
+@inject IJSRuntime JS
+
+
+
+
+<table>
+    <tr>
+        <td><img style="width:200px;height:200px" @ref="previewImageElem" /></td>
+    </tr>
+    <tr>
+        <td><InputFile @ref="inputFile" OnChange="ShowPreview" /></td>
+    </tr>
+</table>
+
+
+
+@code {
+    private InputFile? inputFile;
+    private ElementReference previewImageElem;
+
+    private async Task ShowPreview() => await JS.InvokeVoidAsync(
+        "previewImage", inputFile!.Element, previewImageElem);
+}
+
+
